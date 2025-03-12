@@ -1,4 +1,10 @@
 
+.tableWrapper {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 .tableContainer {
   width: 100%;
   max-width: 1200px;
@@ -10,6 +16,7 @@
   background-color: white;
   position: relative;
   animation: fadeIn 0.5s ease forwards;
+  overflow-x: auto;
 }
 
 .table {
@@ -85,6 +92,12 @@
   opacity: 1;
 }
 
+.noResults {
+  padding: 24px;
+  text-align: center;
+  color: #6b7280;
+}
+
 @media (hover: hover) {
   .resizer {
     opacity: 0;
@@ -92,5 +105,11 @@
 
   .tableHeaderCell:hover .resizer {
     opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .tableContainer {
+    padding: 0 12px;
   }
 }

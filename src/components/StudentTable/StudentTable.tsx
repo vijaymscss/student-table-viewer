@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   useReactTable, 
   getCoreRowModel, 
@@ -10,7 +10,6 @@ import {
   getPaginationRowModel,
   getFilteredRowModel,
   PaginationState,
-  RowData
 } from '@tanstack/react-table';
 import styles from './StudentTable.module.css';
 import { Student } from '../../types/Student';
@@ -28,6 +27,8 @@ const StudentTable: React.FC<StudentTableProps> = ({ students }) => {
     pageIndex: 0,
     pageSize: 5,
   });
+  const [columnResizing, setColumnResizing] = useState(false);
+  const [tableWidth, setTableWidth] = useState<number>(0);
 
   const columns: ColumnDef<Student>[] = [
     {
@@ -69,6 +70,7 @@ const StudentTable: React.FC<StudentTableProps> = ({ students }) => {
       sorting,
       globalFilter,
       pagination,
+      columnSizing: {},
     },
     onSortingChange: setSorting,
     onGlobalFilterChange: setGlobalFilter,
@@ -77,7 +79,34 @@ const StudentTable: React.FC<StudentTableProps> = ({ students }) => {
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    enableColumnResizing: true,
+    columnResizeMode: 'onChange',
   });
+  
+  // Calculate total table width based on column sizes
+  useEffect(() => {
+    const calculateTableWidth = () => {
+      const totalWidth = table.getAllColumns().reduce((width, column) => {
+        return width + column.getSize();
+      }, 0);
+      setTableWidth(totalWidth);
+    };
+    
+    calculateTableWidth();
+    // Update table width when resizing is complete
+    if (!columnResizing) {
+      calculateTableWidth();
+    }
+  }, [table.getAllColumns(), columnResizing]);
+
+  // Update resizing state
+  const handleResizeStart = () => {
+    setColumnResizing(true);
+  };
+
+  const handleResizeEnd = () => {
+    setColumnResizing(false);
+  };
 
   return (
     <div className={styles.tableWrapper}>
@@ -88,7 +117,10 @@ const StudentTable: React.FC<StudentTableProps> = ({ students }) => {
       />
 
       <div className={styles.tableContainer}>
-        <table className={styles.table}>
+        <table 
+          className={styles.table} 
+          style={{ width: tableWidth > 0 ? `${tableWidth}px` : '100%' }}
+        >
           <thead className={styles.tableHeader}>
             {table.getHeaderGroups().map(headerGroup => (
               <tr key={headerGroup.id}>
@@ -108,8 +140,18 @@ const StudentTable: React.FC<StudentTableProps> = ({ students }) => {
                     </span>
                     <div
                       className={`${styles.resizer} ${header.column.getIsResizing() ? styles.isResizing : ''}`}
-                      onMouseDown={header.getResizeHandler()}
-                      onTouchStart={header.getResizeHandler()}
+                      onMouseDown={(e) => {
+                        header.getResizeHandler()(e);
+                        handleResizeStart();
+                      }}
+                      onTouchStart={(e) => {
+                        header.getResizeHandler()(e);
+                        handleResizeStart();
+                      }}
+                      onMouseUp={handleResizeEnd}
+                      onMouseLeave={() => columnResizing && handleResizeEnd()}
+                      onTouchEnd={handleResizeEnd}
+                      onClick={(e) => e.stopPropagation()}
                     />
                   </th>
                 ))}

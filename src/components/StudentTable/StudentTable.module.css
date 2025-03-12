@@ -10,20 +10,19 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 24px;
-  overflow: hidden;
+  overflow-x: auto;
   border-radius: 12px;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
   background-color: white;
   position: relative;
   animation: fadeIn 0.5s ease forwards;
-  overflow-x: auto;
 }
 
 .table {
-  width: 100%;
   border-collapse: separate;
   border-spacing: 0;
   font-size: 14px;
+  min-width: 100%;
 }
 
 .tableHeader {
@@ -72,7 +71,6 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 0;
 }
 
 .resizer {
@@ -80,11 +78,17 @@
   right: 0;
   top: 0;
   height: 100%;
-  width: 5px;
-  background: rgba(0, 0, 0, 0.05);
+  width: 8px;
+  background: rgba(0, 0, 0, 0);
   cursor: col-resize;
   user-select: none;
   touch-action: none;
+  transition: background 0.2s;
+  z-index: 10;
+}
+
+.resizer:hover, .resizer:active {
+  background: rgba(0, 120, 215, 0.2);
 }
 
 .resizer.isResizing {
@@ -99,12 +103,8 @@
 }
 
 @media (hover: hover) {
-  .resizer {
-    opacity: 0;
-  }
-
   .tableHeaderCell:hover .resizer {
-    opacity: 1;
+    background: rgba(0, 0, 0, 0.05);
   }
 }
 

@@ -20,11 +20,10 @@
 }
 
 .table {
-  min-width: 100%;
+  width: 100%;
   border-collapse: separate;
   border-spacing: 0;
   font-size: 14px;
-  table-layout: fixed;
 }
 
 .tableHeader {
@@ -86,7 +85,6 @@
   cursor: col-resize;
   user-select: none;
   touch-action: none;
-  z-index: 11;
 }
 
 .resizer.isResizing {

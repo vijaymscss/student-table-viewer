@@ -28,44 +28,37 @@ const StudentTable: React.FC<StudentTableProps> = ({ students }) => {
     pageIndex: 0,
     pageSize: 5,
   });
-  const [tableWidth, setTableWidth] = useState<number | undefined>(undefined);
 
   const columns: ColumnDef<Student>[] = [
     {
       accessorKey: 'rollNo',
       header: 'Roll No',
       size: 100,
-      enableResizing: true,
     },
     {
       accessorKey: 'name',
       header: 'Name',
       size: 200,
-      enableResizing: true,
     },
     {
       accessorKey: 'address',
       header: 'Address',
       size: 300,
-      enableResizing: true,
     },
     {
       accessorKey: 'email',
       header: 'Email ID',
       size: 250,
-      enableResizing: true,
     },
     {
       accessorKey: 'mobile',
       header: 'Mobile No',
       size: 150,
-      enableResizing: true,
     },
     {
       accessorKey: 'dob',
       header: 'Date of Birth',
       size: 150,
-      enableResizing: true,
     },
   ];
 
@@ -84,12 +77,6 @@ const StudentTable: React.FC<StudentTableProps> = ({ students }) => {
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
-    columnResizeMode: 'onChange',
-    onColumnSizingChange: () => {
-      // Calculate total width of all columns
-      const totalWidth = table.getTotalSize();
-      setTableWidth(totalWidth);
-    },
   });
 
   return (
@@ -101,10 +88,7 @@ const StudentTable: React.FC<StudentTableProps> = ({ students }) => {
       />
 
       <div className={styles.tableContainer}>
-        <table 
-          className={styles.table}
-          style={{ width: tableWidth ? `${tableWidth}px` : '100%' }}
-        >
+        <table className={styles.table}>
           <thead className={styles.tableHeader}>
             {table.getHeaderGroups().map(headerGroup => (
               <tr key={headerGroup.id}>

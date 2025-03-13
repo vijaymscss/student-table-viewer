@@ -2,6 +2,15 @@
 import React from 'react';
 import { Table } from '@tanstack/react-table';
 import styles from './TablePagination.module.css';
+import { 
+  Pagination, 
+  PaginationContent, 
+  PaginationItem, 
+  PaginationLink, 
+  PaginationNext, 
+  PaginationPrevious 
+} from '@/components/ui/pagination';
+import { ChevronFirst, ChevronLast } from 'lucide-react';
 
 interface TablePaginationProps {
   table: Table<any>;
@@ -19,51 +28,45 @@ const TablePagination: React.FC<TablePaginationProps> = ({ table }) => {
         of {table.getFilteredRowModel().rows.length} entries
       </div>
 
-      <div className={styles.paginationButtons}>
-        <button
-          className={styles.paginationButton}
-          onClick={() => table.setPageIndex(0)}
-          disabled={!table.getCanPreviousPage()}
-        >
-          {'<<'}
-        </button>
-        <button
-          className={styles.paginationButton}
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
-        >
-          {'<'}
-        </button>
-        
-        <div className={styles.pageNumbers}>
-          {Array.from({ length: table.getPageCount() }, (_, i) => (
-            <button
-              key={i}
-              className={`${styles.pageNumber} ${
-                i === table.getState().pagination.pageIndex ? styles.activePage : ''
-              }`}
-              onClick={() => table.setPageIndex(i)}
+      <Pagination>
+        <PaginationContent className={styles.paginationNav}>
+          <PaginationItem>
+            <PaginationLink 
+              className={styles.paginationButton}
+              onClick={() => table.setPageIndex(0)} 
+              disabled={!table.getCanPreviousPage()}
             >
-              {i + 1}
-            </button>
-          ))}
-        </div>
+              <ChevronFirst className="h-4 w-4" />
+            </PaginationLink>
+          </PaginationItem>
+          
+          <PaginationItem>
+            <PaginationPrevious 
+              className={styles.paginationButton}
+              onClick={() => table.previousPage()} 
+              disabled={!table.getCanPreviousPage()}
+            />
+          </PaginationItem>
 
-        <button
-          className={styles.paginationButton}
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-        >
-          {'>'}
-        </button>
-        <button
-          className={styles.paginationButton}
-          onClick={() => table.setPageIndex(table.getPageCount() - 1)}
-          disabled={!table.getCanNextPage()}
-        >
-          {'>>'}
-        </button>
-      </div>
+          <PaginationItem>
+            <PaginationNext 
+              className={styles.paginationButton}
+              onClick={() => table.nextPage()} 
+              disabled={!table.getCanNextPage()}
+            />
+          </PaginationItem>
+          
+          <PaginationItem>
+            <PaginationLink 
+              className={styles.paginationButton}
+              onClick={() => table.setPageIndex(table.getPageCount() - 1)} 
+              disabled={!table.getCanNextPage()}
+            >
+              <ChevronLast className="h-4 w-4" />
+            </PaginationLink>
+          </PaginationItem>
+        </PaginationContent>
+      </Pagination>
     </div>
   );
 };

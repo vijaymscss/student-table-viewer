@@ -9,13 +9,15 @@
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0;
   overflow-x: auto;
-  border-radius: 12px;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
+  border-radius: 16px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
   background-color: white;
   position: relative;
   animation: fadeIn 0.5s ease forwards;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(229, 231, 235, 0.5);
 }
 
 .table {
@@ -34,11 +36,11 @@
 }
 
 .tableHeaderCell {
-  padding: 16px 12px;
+  padding: 16px 16px;
   text-align: left;
   font-weight: 600;
-  color: #1d1d1f;
-  border-bottom: 1px solid #e6e6e6;
+  color: var(--foreground-color);
+  border-bottom: 1px solid var(--border-color);
   position: relative;
   cursor: pointer;
   transition: background-color 0.2s;
@@ -48,29 +50,34 @@
 }
 
 .tableHeaderCell:hover {
-  background-color: #f5f5f7;
+  background-color: rgba(139, 92, 246, 0.05);
 }
 
 .sortIcon {
   display: inline-block;
-  margin-left: 4px;
+  margin-left: 8px;
   transition: transform 0.2s;
+  font-size: 12px;
+  opacity: 0.7;
 }
 
 .tableRow {
-  transition: background-color 0.2s;
+  transition: all 0.15s ease;
 }
 
 .tableRow:hover {
-  background-color: #f5f5f7;
+  background-color: rgba(139, 92, 246, 0.05);
+  transform: translateY(-1px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .tableCell {
-  padding: 16px 12px;
-  border-bottom: 1px solid #e6e6e6;
+  padding: 16px 16px;
+  border-bottom: 1px solid var(--border-color);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  color: var(--foreground-color);
 }
 
 .resizer {
@@ -88,28 +95,30 @@
 }
 
 .resizer:hover, .resizer:active {
-  background: rgba(0, 120, 215, 0.2);
+  background: rgba(139, 92, 246, 0.2);
 }
 
 .resizer.isResizing {
-  background: rgba(0, 120, 215, 0.4);
+  background: rgba(139, 92, 246, 0.4);
   opacity: 1;
 }
 
 .noResults {
-  padding: 24px;
+  padding: 48px 24px;
   text-align: center;
-  color: #6b7280;
+  color: var(--muted-color);
+  font-size: 16px;
 }
 
 @media (hover: hover) {
   .tableHeaderCell:hover .resizer {
-    background: rgba(0, 0, 0, 0.05);
+    background: rgba(139, 92, 246, 0.1);
   }
 }
 
 @media (max-width: 768px) {
   .tableContainer {
-    padding: 0 12px;
+    padding: 0;
+    border-radius: 12px;
   }
 }

@@ -7,10 +7,11 @@
 a {
   color: var(--primary-color);
   text-decoration: none;
+  transition: color 0.2s ease;
 }
 
 a:hover {
-  text-decoration: underline;
+  color: color-mix(in srgb, var(--primary-color), black 15%);
 }
 
 button {
@@ -21,14 +22,21 @@ button {
   background-color: var(--primary-color);
   color: var(--primary-foreground);
   font-weight: 500;
-  transition: background-color 0.2s;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.25);
 }
 
 button:hover {
   background-color: color-mix(in srgb, var(--primary-color), black 10%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.35);
 }
 
 button:focus {
-  outline: 2px solid var(--primary-color);
-  outline-offset: 2px;
+  outline: none;
+  box-shadow: 0 0 0 2px var(--background-color), 0 0 0 4px var(--primary-color);
+}
+
+button:active {
+  transform: translateY(0);
 }

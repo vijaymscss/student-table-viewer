@@ -1,42 +1,10 @@
 
 .controlsContainer {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   margin-bottom: 20px;
   font-size: 14px;
-}
-
-.pageSize {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.pageSizeSelect {
-  padding: 8px 12px;
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  background-color: white;
-  font-size: 14px;
-  min-width: 80px;
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236b7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 16px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.pageSizeSelect:hover {
-  border-color: var(--primary-color);
-}
-
-.pageSizeSelect:focus {
-  outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
 }
 
 .search {
@@ -71,9 +39,7 @@
 
 @media (max-width: 768px) {
   .controlsContainer {
-    flex-direction: column;
-    gap: 16px;
-    align-items: flex-start;
+    justify-content: center;
   }
 
   .searchInput {

@@ -16,25 +16,6 @@ const TableControls: React.FC<TableControlsProps> = ({
 }) => {
   return (
     <div className={styles.controlsContainer}>
-      <div className={styles.pageSize}>
-        <label htmlFor="page-size">Show</label>
-        <select
-          id="page-size"
-          value={table.getState().pagination.pageSize}
-          onChange={e => {
-            table.setPageSize(Number(e.target.value));
-          }}
-          className={styles.pageSizeSelect}
-        >
-          {[5, 10, 20, 30, 50].map(pageSize => (
-            <option key={pageSize} value={pageSize}>
-              {pageSize}
-            </option>
-          ))}
-        </select>
-        <span>entries</span>
-      </div>
-
       <div className={styles.search}>
         <label htmlFor="search">Search:</label>
         <input

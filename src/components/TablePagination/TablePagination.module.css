@@ -13,6 +13,45 @@
   color: var(--muted-color);
 }
 
+.controlsWrapper {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.rowsPerPage {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted-color);
+}
+
+.pageSizeSelect {
+  padding: 6px 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background-color: white;
+  font-size: 14px;
+  min-width: 70px;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236b7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pageSizeSelect:hover {
+  border-color: var(--primary-color);
+}
+
+.pageSizeSelect:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
+}
+
 .paginationNav {
   display: flex;
   align-items: center;
@@ -20,7 +59,9 @@
 }
 
 .paginationButton {
-  padding: 8px 12px;
+  padding: 8px;
+  width: 36px;
+  height: 36px;
   background-color: white;
   border: 1px solid var(--border-color);
   border-radius: 8px;
@@ -45,7 +86,7 @@
   box-shadow: none;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .paginationContainer {
     flex-direction: column;
     gap: 16px;
@@ -53,6 +94,24 @@
   
   .paginationInfo {
     text-align: center;
+  }
+  
+  .controlsWrapper {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .controlsWrapper {
+    flex-direction: column;
+  }
+  
+  .rowsPerPage {
+    width: 100%;
+    justify-content: center;
   }
   
   .paginationNav {

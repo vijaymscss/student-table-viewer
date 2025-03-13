@@ -50,6 +50,14 @@ function generateStudents(count: number): Student[] {
     const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
     const name = `${firstName} ${lastName}`;
     
+    // Generate father name (Mr. + random first name + same last name)
+    const fatherFirstName = firstNames[Math.floor(Math.random() * firstNames.length)];
+    const fatherName = `Mr. ${fatherFirstName} ${lastName}`;
+
+    // Generate mother name (Mrs. + random first name + same last name)
+    const motherFirstName = firstNames[Math.floor(Math.random() * firstNames.length)];
+    const motherName = `Mrs. ${motherFirstName} ${lastName}`;
+    
     const streetNumber = Math.floor(Math.random() * 9000) + 1000;
     const street = streets[Math.floor(Math.random() * streets.length)];
     const city = cities[Math.floor(Math.random() * cities.length)];
@@ -80,6 +88,8 @@ function generateStudents(count: number): Student[] {
       email,
       mobile,
       dob,
+      fatherName,
+      motherName
     });
   }
   

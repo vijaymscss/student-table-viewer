@@ -42,6 +42,16 @@ const StudentTable: React.FC<StudentTableProps> = ({ students }) => {
       size: 200,
     },
     {
+      accessorKey: 'fatherName',
+      header: 'Father\'s Name',
+      size: 200,
+    },
+    {
+      accessorKey: 'motherName',
+      header: 'Mother\'s Name',
+      size: 200,
+    },
+    {
       accessorKey: 'address',
       header: 'Address',
       size: 300,

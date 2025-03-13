@@ -7,4 +7,6 @@ export interface Student {
   email: string;
   mobile: string;
   dob: string;
+  fatherName: string;
+  motherName: string;
 }
